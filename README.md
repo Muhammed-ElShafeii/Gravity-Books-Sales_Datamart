@@ -119,5 +119,3 @@ Main.dtsx
 👨‍💻 Author
 Mohamed El Shafei
 Data Engineering | Data Analytics | Sales Analytics. 
-<img width="843" height="2850" alt="image" src="https://github.com/user-attachments/assets/a9f3f6f2-3f75-4686-aae1-04a261fb985f" />
-
