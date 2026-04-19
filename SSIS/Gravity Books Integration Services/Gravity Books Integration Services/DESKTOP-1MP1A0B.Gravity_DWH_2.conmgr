@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-1MP1A0B.Gravity_DWH_2"
+  DTS:DTSID="{B7F95B96-8E40-428A-B3BF-F9EB585A2F49}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DESKTOP-1MP1A0B;User ID=;Initial Catalog=Gravity_DWH_2;Provider=MSOLEDBSQL19.1;Persist Security Info=False;Integrated Security=SSPI;Initial File Name=;Use Encryption for Data=Optional;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;Host Name In Certificate=;Server Certificate=;Application Name=SSIS-Gravity Books Integration Services-{B7F95B96-8E40-428A-B3BF-F9EB585A2F49}DESKTOP-1MP1A0B.Gravity_DWH_2;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

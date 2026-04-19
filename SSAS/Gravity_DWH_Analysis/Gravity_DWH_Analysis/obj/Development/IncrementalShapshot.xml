@@ -1,0 +1,138 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>Gravity_DWH_Analysis</Database>
+    <Server>localhost</Server>
+    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>7jmQq7IwGpZcP63zA8NYZrdPF2w=4/18/2026 7:35:38 PM4/18/2026 7:35:38 PM</TimeStamp>
+        <ID>
+          <String>Sales_Data_Mart</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>z8xSHdfPWkl+ZlgAGh3kzuq6XJM=4/18/2026 7:39:30 PM4/18/2026 7:39:30 PM</TimeStamp>
+        <ID>
+          <String>Fact_Orders_with_Dimensions</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>Bn2Nj+6zZu1rM94+y3qizNGILb4=4/19/2026 2:20:39 PM4/19/2026 2:20:39 PM</TimeStamp>
+        <ID>
+          <String>Fact_Order_History_with_Dimensions</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>GQx7IvTWUmVmyuxQT0EEMuF0DXU=4/18/2026 11:42:23 PM4/18/2026 8:13:18 PM</TimeStamp>
+        <ID>
+          <String>Dim Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>jNlDZ4k2op0wrKrbbLasrwOHsM4=4/18/2026 8:40:42 PM4/18/2026 8:13:18 PM</TimeStamp>
+        <ID>
+          <String>Dim Shipping Method</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>4Yzt72ZBW5KS3/ZQ0dfQT1xpm8g=4/18/2026 11:05:04 PM4/18/2026 8:13:18 PM</TimeStamp>
+        <ID>
+          <String>Dim Customer V3</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>TW/rFBKJWrf1GY/Z9RkcXdR9n0M=4/18/2026 8:45:39 PM4/18/2026 8:13:18 PM</TimeStamp>
+        <ID>
+          <String>Dim Book</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Zcd3YkTJjuqfjFxJbS3b0PP/gj8=4/19/2026 12:36:56 AM4/18/2026 9:29:27 PM</TimeStamp>
+        <ID>
+          <String>Dim Author</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>A0RXL0EvmBgbBtxAXzz9vO6WFqQ=4/19/2026 2:21:47 PM4/19/2026 2:21:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Date 1</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>BlALPIh9UwhDmkKcF4LT4iwzgaE=4/19/2026 3:03:42 PM4/19/2026 2:21:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Shipping Method 1</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>3r6D1BkVjfaXTzywU/RZjavXW0s=4/19/2026 3:20:22 PM4/19/2026 2:21:47 PM</TimeStamp>
+        <ID>
+          <String>Dim Customer V3 1</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>W0hdsOSrzi/GG1v/uE3e/ka6Pus=4/19/2026 2:21:47 PM4/19/2026 2:21:47 PM</TimeStamp>
+        <ID>
+          <String>Fact Order History V2</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>L9z5QC4QVBCJUpKN6ubXgyjRITc=4/19/2026 2:20:39 PM4/18/2026 8:13:18 PMrai4oBjfEHp82ArhYDYvjvasAHA=4/19/2026 12:06:12 AM4/18/2026 8:13:18 PM</TimeStamp>
+        <ID>
+          <String>Fact_Orders_Cube</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>jXv/T7cVBkRPltIhh9JI0e5ue18=4/19/2026 3:16:27 PM4/19/2026 2:21:46 PMgEr/SSfieVxiHZ1MhJCoSu26gOk=4/19/2026 2:21:47 PM4/19/2026 2:21:46 PM</TimeStamp>
+        <ID>
+          <String>Fact_Order_History_with_Dimensions</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Role</Type>
+        <TimeStamp>hQKL4Uu81YGBT9eHO0GezPeFz+k=4/19/2026 1:06:45 AM4/19/2026 1:06:28 AM</TimeStamp>
+        <ID>
+          <String>Role</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>H/Gese2ziYwWC942Vj7kJ1BPcJY=4/19/2026 1:06:45 AM4/18/2026 7:25:01 PM</TimeStamp>
+      <ID>
+        <String>Gravity_DWH_Analysis</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2026-04-19T13:21:30.66Z</LastDeployed>
+</DeploymentSnapshot>

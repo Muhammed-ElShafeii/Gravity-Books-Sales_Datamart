@@ -1,0 +1,1230 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/8/2026 6:44:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-1MP1A0B"
+  DTS:CreatorName="DESKTOP-1MP1A0B\Cyber"
+  DTS:DTSID="{18F7F31C-82C9-45DB-BFC0-91D73DCFA320}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dim_Book"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{9933FB38-BB49-4E51-AFFF-6FAE8BC78E7F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dim_Book ETL"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1786E17E-47B9-4D8C-9DD6-E53F761C90D8}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dim_Book ETL"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dim_Book ETL\Check if its exists in Dim_Book"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Check if its exists in Dim_Book"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+   
+	Book_SK,
+    
+	Book_ID_BK,
+   
+	Title            AS dm_title,
+    
+	ISBN13           AS dm_isbn13,
+    
+	Language_SK_FK,
+	Num_Pages        AS dm_num_pages,
+    			publication_date AS dm_publication_date,
+	[Publisher_Name] as dm_Publisher_Name
+
+FROM Dim_Book</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT 
+   
+	Book_SK,
+    
+	Book_ID_BK,
+   
+	Title            AS dm_title,
+    
+	ISBN13           AS dm_isbn13,
+    
+	Language_SK_FK,
+	Num_Pages        AS dm_num_pages,
+    			publication_date AS dm_publication_date,
+	[Publisher_Name] as dm_Publisher_Name
+
+FROM Dim_Book) [refTable]
+where [refTable].[Book_ID_BK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Book_SK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Book_ID_BK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="dm_title" dataType="DT_STR" length="400" precision="0" scale="0" codePage="1256"/&gt;&lt;referenceColumn name="dm_isbn13" dataType="DT_STR" length="13" precision="0" scale="0" codePage="1256"/&gt;&lt;referenceColumn name="Language_SK_FK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="dm_num_pages" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="dm_publication_date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="dm_Publisher_Name" dataType="DT_WSTR" length="1000" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Connections[OleDbConnection]"
+                  connectionManagerID="{B7F95B96-8E40-428A-B3BF-F9EB585A2F49}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-1MP1A0B.Gravity_DWH_2]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input].Columns[book_id]"
+                      cachedDataType="i4"
+                      cachedName="book_id"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Book_ID_BK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_title]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="400"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_title]"
+                      name="dm_title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">dm_title</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_num_pages]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_num_pages]"
+                      name="dm_num_pages"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">dm_num_pages</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_isbn13]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="13"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_isbn13]"
+                      name="dm_isbn13"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">dm_isbn13</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_publication_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_publication_date]"
+                      name="dm_publication_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">dm_publication_date</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no)"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split (Check if Par changed or no)"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[title]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="title"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[num_pages]"
+                      cachedDataType="i4"
+                      cachedName="num_pages"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[dm_title]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="dm_title"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_title]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[dm_num_pages]"
+                      cachedDataType="i4"
+                      cachedName="dm_num_pages"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_num_pages]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[isbn13]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="isbn13"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[publication_date]"
+                      cachedDataType="dbDate"
+                      cachedName="publication_date"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[dm_isbn13]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="dm_isbn13"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_isbn13]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input].Columns[dm_publication_date]"
+                      cachedDataType="dbDate"
+                      cachedName="dm_publication_date"
+                      lineageId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_publication_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Changed]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Changed"
+                  synchronousInputId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]} != #{Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_title]} || #{Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]} != #{Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_num_pages]} || #{Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]} != #{Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_isbn13]} || #{Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]} != #{Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output].Columns[dm_publication_date]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">title != dm_title || num_pages != dm_num_pages || isbn13 != dm_isbn13 || publication_date != dm_publication_date</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_Book ETL\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Dim_Book
+SET 
+    title            = ?,
+    isbn13           = ?,
+    num_pages        = ?,
+    publication_date = ?
+WHERE Book_ID_BK = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1256</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Book ETL\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{B7F95B96-8E40-428A-B3BF-F9EB585A2F49}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-1MP1A0B.Gravity_DWH_2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[title]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="title"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[isbn13]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="isbn13"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[num_pages]"
+                      cachedDataType="i4"
+                      cachedName="num_pages"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[publication_date]"
+                      cachedDataType="dbDate"
+                      cachedName="publication_date"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[book_id]"
+                      cachedDataType="i4"
+                      cachedName="book_id"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1256"
+                      dataType="str"
+                      length="400"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1256"
+                      dataType="str"
+                      length="13"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="dbDate"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_Book ETL\OLE DB Destination (insert)"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination (insert)"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Book]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Book ETL\OLE DB Destination (insert).Connections[OleDbConnection]"
+                  connectionManagerID="{B7F95B96-8E40-428A-B3BF-F9EB585A2F49}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-1MP1A0B.Gravity_DWH_2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[title]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="title"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[isbn13]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="isbn13"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[ISBN13]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[num_pages]"
+                      cachedDataType="i4"
+                      cachedName="num_pages"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Num_Pages]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[publication_date]"
+                      cachedDataType="dbDate"
+                      cachedName="publication_date"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Publication_Date]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[publisher_name]"
+                      cachedDataType="wstr"
+                      cachedLength="1000"
+                      cachedName="publisher_name"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Publisher_Name]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publisher_name]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[book_id]"
+                      cachedDataType="i4"
+                      cachedName="book_id"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Book_ID_BK]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]" />
+                    <inputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].Columns[language_id]"
+                      cachedDataType="i4"
+                      cachedName="language_id"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Language_SK_FK]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[language_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Book_SK]"
+                      dataType="i4"
+                      name="Book_SK" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Book_ID_BK]"
+                      dataType="i4"
+                      name="Book_ID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      codePage="1256"
+                      dataType="str"
+                      length="400"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[ISBN13]"
+                      codePage="1256"
+                      dataType="str"
+                      length="13"
+                      name="ISBN13" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Language_SK_FK]"
+                      dataType="i4"
+                      name="Language_SK_FK" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Num_Pages]"
+                      dataType="i4"
+                      name="Num_Pages" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Publication_Date]"
+                      dataType="dbDate"
+                      name="Publication_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input].ExternalColumns[Publisher_Name]"
+                      dataType="wstr"
+                      length="1000"
+                      name="Publisher_Name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_Book ETL\OLE DB Destination (insert).Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Destination (insert).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Destination (insert).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Destination (insert).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_Book ETL\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">use gravity_books
+select b.book_id, b.title, b.isbn13, b.language_id, b.num_pages, b.publication_date, p.publisher_name from book b left join publisher p on b.publisher_id = p.publisher_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Book ETL\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{78FD8C46-DA97-40AC-A8F6-74ECC79C6FE7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-1MP1A0B.gravity_books]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[book_id]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[book_id]"
+                      name="book_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      length="400"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[title]"
+                      name="title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbn13]"
+                      length="13"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbn13]"
+                      name="isbn13"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[language_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[language_id]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[language_id]"
+                      name="language_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[num_pages]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[num_pages]"
+                      name="num_pages"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[publication_date]"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publication_date]"
+                      name="publication_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publisher_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[publisher_name]"
+                      length="1000"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].Columns[publisher_name]"
+                      name="publisher_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[book_id]"
+                      dataType="i4"
+                      name="book_id" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      codePage="1256"
+                      dataType="str"
+                      length="400"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbn13]"
+                      codePage="1256"
+                      dataType="str"
+                      length="13"
+                      name="isbn13" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[language_id]"
+                      dataType="i4"
+                      name="language_id" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[num_pages]"
+                      dataType="i4"
+                      name="num_pages" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[publication_date]"
+                      dataType="dbDate"
+                      name="publication_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[publisher_name]"
+                      dataType="wstr"
+                      length="1000"
+                      name="publisher_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[book_id]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[book_id]"
+                      name="book_id" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[title]"
+                      codePage="1256"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[title]"
+                      name="title" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbn13]"
+                      codePage="1256"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbn13]"
+                      name="isbn13" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[language_id]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[language_id]"
+                      name="language_id" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[num_pages]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[num_pages]"
+                      name="num_pages" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[publication_date]"
+                      dataType="dbDate"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[publication_date]"
+                      name="publication_date" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[publisher_name]"
+                      dataType="wstr"
+                      length="1000"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[publisher_name]"
+                      name="publisher_name" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dim_Book ETL.Paths[Changed]"
+              endId="Package\Dim_Book ETL\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Changed"
+              startId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Outputs[Changed]" />
+            <path
+              refId="Package\Dim_Book ETL.Paths[Lookup Match Output]"
+              endId="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no).Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Dim_Book ETL.Paths[Lookup No Match Output]"
+              endId="Package\Dim_Book ETL\OLE DB Destination (insert).Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Dim_Book ETL.Paths[OLE DB Source Output]"
+              endId="Package\Dim_Book ETL\Check if its exists in Dim_Book.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Dim_Book ETL\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\Dim_Book ETL"
+          TopLeft="202.142857573166,117.764705779128" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dim_Book ETL">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Dim_Book ETL\OLE DB Source"
+          TopLeft="43.5714286641805,35.9411764390844" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Dim_Book ETL\OLE DB Destination (insert)"
+          TopLeft="402.85714371472,145.294117519703" />
+        <NodeLayout
+          Size="222.4,41.6"
+          Id="Package\Dim_Book ETL\Check if its exists in Dim_Book"
+          TopLeft="336.428572144739,33.9294117405753" />
+        <EdgeLayout
+          Id="Package\Dim_Book ETL.Paths[OLE DB Source Output]"
+          TopLeft="193.17142866418,55.7352940898298">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="143.257143480559,0"
+              Start="0,0"
+              End="135.757143480559,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="135.757143480559,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dim_Book ETL.Paths[Lookup No Match Output]"
+          TopLeft="447.628572144739,75.5294117405753">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.2285715699809,69.7647057791273"
+              Start="0,0"
+              End="59.2285715699809,62.2647057791273">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.8823528895636" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.8823528895636"
+                    Point2="0,34.8823528895636"
+                    Point3="4,34.8823528895636" />
+                  <mssgle:LineSegment
+                    End="55.2285715699809,34.8823528895636" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.2285715699809,34.8823528895636"
+                    Point2="59.2285715699809,34.8823528895636"
+                    Point3="59.2285715699809,38.8823528895636" />
+                  <mssgle:LineSegment
+                    End="59.2285715699809,62.2647057791273" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.1921009337596,39.8823528895636,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="292.8,41.6"
+          Id="Package\Dim_Book ETL\Conditional Split (Check if Par changed or no)"
+          TopLeft="27.8571429164434,140.705882229607" />
+        <EdgeLayout
+          Id="Package\Dim_Book ETL.Paths[Lookup Match Output]"
+          TopLeft="411.895238811406,75.5294117405753">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-237.638095894963,65.1764704890318"
+              Start="0,0"
+              End="-237.638095894963,57.6764704890318">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.34991592628" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.34991592628"
+                    Point2="0,26.34991592628"
+                    Point3="-4,26.34991592628" />
+                  <mssgle:LineSegment
+                    End="-233.638095894963,26.34991592628" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-233.638095894963,26.34991592628"
+                    Point2="-237.638095894963,26.34991592628"
+                    Point3="-237.638095894963,30.34991592628" />
+                  <mssgle:LineSegment
+                    End="-237.638095894963,57.6764704890318" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-167.010434666231,31.34991592628,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Dim_Book ETL\OLE DB Command"
+          TopLeft="85.0000001809427,240.882352730034" />
+        <EdgeLayout
+          Id="Package\Dim_Book ETL.Paths[Changed]"
+          TopLeft="170.828571548693,182.305882229607">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.5764705004268"
+              Start="0,0"
+              End="0,51.0764705004268">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.0764705004268" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-19.8755078125,19.7066922814634,39.751015625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Book ETL\OLE DB Destination (insert)">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Book ETL\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Book ETL\Check if its exists in Dim_Book">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
