@@ -8,14 +8,6 @@ The project includes:
 	• Data cleaning and validation using SQL Server
 	• ETL pipelines using SQL Server Integration Services (SSIS)
 	• Analytical model using SQL Server Analysis Services (SSAS)
-
-🏗️ Project Structure
-Gravity_Books_DWH_Project/
- ├── Gravity Books Integration Services   (SSIS Project)
- ├── Gravity_DWH_Analysis                (SSAS Project)
- ├── Database/
- │    └── Gravity_books_v2.bak           (Database Backup)
- └── README.txt
  
 ⚙️ Requirements
 To run this project, the following tools are required:
